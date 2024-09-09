@@ -16,4 +16,5 @@ jobs:
       run: |
         ls
         cd PrivateBin-main
+        ls
         make test
