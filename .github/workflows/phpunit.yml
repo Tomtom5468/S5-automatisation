@@ -22,3 +22,10 @@ jobs:
         uses: php-actions/phpunit@v9
         with:
           memory_limit: "256M"
+
+      - name: Upload PHPUnit coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: phpunit-coverage-report
+          path: build/coverage
+
