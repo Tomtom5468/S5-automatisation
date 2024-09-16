@@ -20,15 +20,19 @@ jobs:
           coverage: xdebug  # Ajout de xdebug pour la couverture de code
 
       - name: Install dependencies
-        run: composer install
+        run: |
+          cd PrivateBin-main  # Se déplacer vers le bon répertoire
+          composer install  # Installer les dépendances
 
       - name: Run PHPUnit with coverage
-        run: ./vendor/bin/phpunit --coverage-html build/coverage-html
+        run: |
+          cd PrivateBin-main  # Se déplacer vers le répertoire avec PHPUnit
+          ./vendor/bin/phpunit --coverage-html build/coverage-html
         env:
           XDEBUG_MODE: coverage  # Activation de la couverture de code pour PHPUnit
 
       - name: Upload coverage report
-        uses: actions/upload-artifact@v3  # Mettre à jour vers la version v3
+        uses: actions/upload-artifact@v3
         with:
           name: coverage-html
-          path: build/coverage-html
+          path: PrivateBin-main/build/coverage-html  # Chemin pour le rapport de couverture
