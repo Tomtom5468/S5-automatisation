@@ -16,7 +16,7 @@ jobs:
     - name: Set up PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.0' # Tu peux spécifier la version que tu utilises
+        php-version: '8.0' # Ou la version que tu utilises
     
     - name: Install Dependencies
       run: |
@@ -39,9 +39,7 @@ jobs:
         name: coverage-report
         path: PrivateBin-main/coverage-cobertura.xml
 
-    - name: Coverage Summary
-      uses: irongut/CodeCoverageSummary@v2.3.0
+    - name: Upload coverage report to Codecov
+      uses: codecov/codecov-action@v3
       with:
-        cobertura-file: PrivateBin-main/coverage-cobertura.xml
-        format: markdown
-
+        files: PrivateBin-main/coverage-cobertura.xml
