@@ -40,7 +40,8 @@ jobs:
         path: PrivateBin-main/coverage-cobertura.xml
 
     - name: Coverage Summary
-      uses: irongut/CodeCoverageSummary@v2.4.0
+      uses: irongut/CodeCoverageSummary@v2.3.0
       with:
         cobertura-file: PrivateBin-main/coverage-cobertura.xml
         format: markdown
+
