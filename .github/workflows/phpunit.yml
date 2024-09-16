@@ -28,7 +28,7 @@ jobs:
           XDEBUG_MODE: coverage  # Activation de la couverture de code pour PHPUnit
 
       - name: Upload coverage report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3  # Mettre à jour vers la version v3
         with:
           name: coverage-html
           path: build/coverage-html
