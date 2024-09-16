@@ -12,34 +12,24 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Set up PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.0' # Ou la version que tu utilises
-    
-    - name: Install Dependencies
-      run: |
-        cd PrivateBin-main
-        composer install
 
-    - name: Run PHPUnit tests with text coverage
+    - name: Set up environment
       run: |
         cd PrivateBin-main
-        phpunit --coverage-text
+        composer install # Assurez-vous que les dépendances sont installées
 
-    - name: Run PHPUnit tests with Cobertura coverage
+    - name: Run PHPUnit and generate coverage report
       run: |
         cd PrivateBin-main
-        phpunit --coverage-cobertura coverage-cobertura.xml
+        phpunit --coverage-text --coverage-clover coverage.xml
 
     - name: Upload coverage report
       uses: actions/upload-artifact@v3
       with:
         name: coverage-report
-        path: PrivateBin-main/coverage-cobertura.xml
+        path: PrivateBin-main/coverage.xml
 
-    - name: Upload coverage report to Codecov
-      uses: codecov/codecov-action@v3
+    - name: Generate coverage summary
+      uses: irongut/CodeCoverageSummary@v1
       with:
-        files: PrivateBin-main/coverage-cobertura.xml
+        coverage-file: PrivateBin-main/coverage.xml
