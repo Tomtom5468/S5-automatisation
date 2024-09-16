@@ -1,5 +1,0 @@
-<phpunit>
-  <logging>
-    <log type="junit" target="build/junit.xml" />
-  </logging>
-</phpunit>
