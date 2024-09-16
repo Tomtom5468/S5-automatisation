@@ -16,7 +16,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.1'  # Mettre à jour vers PHP 8.1
           coverage: xdebug  # Ajout de xdebug pour la couverture de code
 
       - name: Install dependencies
@@ -26,13 +26,13 @@ jobs:
 
       - name: Run PHPUnit with coverage
         run: |
-          cd PrivateBin-main  # Se déplacer vers le répertoire avec PHPUnit
+          cd PrivateBin-main
           ./vendor/bin/phpunit --coverage-html build/coverage-html
         env:
-          XDEBUG_MODE: coverage  # Activation de la couverture de code pour PHPUnit
+          XDEBUG_MODE: coverage
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v3
         with:
           name: coverage-html
-          path: PrivateBin-main/build/coverage-html  # Chemin pour le rapport de couverture
+          path: PrivateBin-main/build/coverage-html
