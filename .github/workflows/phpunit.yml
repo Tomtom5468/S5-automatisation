@@ -9,6 +9,6 @@ on:
 jobs:
   unit-tests:
   - name: PHPUnit tests
-      uses: php-actions/phpunit@v3
-      with:
-        memory_limit: "256M"
+    uses: php-actions/phpunit@v9
+    with:
+      memory_limit: "256M"
