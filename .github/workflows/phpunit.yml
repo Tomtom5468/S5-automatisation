@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up environment
+      run: |
+        cd PrivateBin-main
+        make test
+
+jobs:
+  unit-tests:
+  - name: PHPUnit tests
+      uses: php-actions/phpunit@v3
+      with:
+        memory_limit: "256M"
