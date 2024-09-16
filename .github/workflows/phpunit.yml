@@ -17,15 +17,18 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.0'
-          
-      - name: PHPUnit tests
-        uses: php-actions/phpunit@v9
-        with:
-          memory_limit: "256M"
+          coverage: xdebug  # Ajout de xdebug pour la couverture de code
 
-      - name: Upload PHPUnit coverage report
+      - name: Install dependencies
+        run: composer install
+
+      - name: Run PHPUnit with coverage
+        run: ./vendor/bin/phpunit --coverage-html build/coverage-html
+        env:
+          XDEBUG_MODE: coverage  # Activation de la couverture de code pour PHPUnit
+
+      - name: Upload coverage report
         uses: actions/upload-artifact@v2
         with:
-          name: phpunit-coverage-report
-          path: build/coverage
-
+          name: coverage-html
+          path: build/coverage-html
