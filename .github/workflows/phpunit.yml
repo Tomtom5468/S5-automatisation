@@ -22,9 +22,7 @@ jobs:
         with:
           version: 9.5.26
           php_extensions: xdebug
-          bootstrap: PrivateBin-main/vendor/autoload.php
           configuration: PrivateBin-main/phpunit.xml
-          args: --coverage-text
         env:
           XDEBUG_MODE: coverage
           TEST_NAME: Scarlett
