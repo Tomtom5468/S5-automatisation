@@ -17,6 +17,9 @@ jobs:
         with:
           working_dir: PrivateBin-main
 
+      - name: List files in vendor directory
+        run: ls -la PrivateBin-main/vendor
+
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v3
         with:
