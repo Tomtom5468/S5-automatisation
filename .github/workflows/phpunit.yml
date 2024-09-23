@@ -13,9 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: List files in PrivateBin-main
-        run: ls -la PrivateBin-main
-
       - uses: php-actions/composer@v6
         with:
           working_dir: PrivateBin-main
@@ -25,8 +22,8 @@ jobs:
         with:
           version: 9.5.26
           php_extensions: xdebug
-          bootstrap: vendor/autoload.php
-          configuration: test/phpunit.xml
+          bootstrap: PrivateBin-main/vendor/autoload.php
+          configuration: PrivateBin-main/phpunit.xml
           args: --coverage-text
         env:
           XDEBUG_MODE: coverage
