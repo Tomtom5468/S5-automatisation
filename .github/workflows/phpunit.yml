@@ -7,32 +7,22 @@ on:
     branches: [ main ]
 
 jobs:
-  unit-tests:
+  build-test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
+      - uses: php-actions/composer@v6
+
+      - name: PHPUnit Tests
+        uses: php-actions/phpunit@v3
         with:
-          php-version: '8.1'  # Mettre à jour vers PHP 8.1
-          coverage: xdebug  # Ajout de xdebug pour la couverture de code
-
-      - name: Install dependencies
-        run: |
-          cd PrivateBin-main  # Se déplacer vers le bon répertoire
-          composer install  # Installer les dépendances
-
-      - name: Run PHPUnit with coverage
-        run: |
-          cd PrivateBin-main
-          ./vendor/bin/phpunit --coverage-html build/coverage-html
+          version: 9.5.26
+          php_extensions: xdebug
+          bootstrap: vendor/autoload.php
+          configuration: test/phpunit.xml
+          args: --coverage-text
         env:
           XDEBUG_MODE: coverage
-
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-html
-          path: PrivateBin-main/build/coverage-html
+          TEST_NAME: Scarlett
