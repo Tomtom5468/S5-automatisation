@@ -21,12 +21,13 @@ jobs:
         run: ls -la PrivateBin-main/vendor
 
       - name: PHPUnit Tests
+        working-directory: PrivateBin-main  # Définir explicitement le répertoire de travail pour PHPUnit
         uses: php-actions/phpunit@v3
         with:
           version: 9.5.26
           php_extensions: xdebug
-          bootstrap: PrivateBin-main/vendor/autoload.php
-          configuration: PrivateBin-main/phpunit.xml
+          bootstrap: vendor/autoload.php  # Puisque vous êtes déjà dans PrivateBin-main
+          configuration: phpunit.xml
           args: --coverage-text
         env:
           XDEBUG_MODE: coverage
