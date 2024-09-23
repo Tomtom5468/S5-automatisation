@@ -15,7 +15,7 @@ jobs:
 
       - uses: php-actions/composer@v6
         with:
-          working-directory: ./PrivateBin-main/composer.json
+          working_dir: ./PrivateBin-main/composer.json
 
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v3
