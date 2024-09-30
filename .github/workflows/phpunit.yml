@@ -25,6 +25,9 @@ jobs:
           XDEBUG_MODE: coverage
           TEST_NAME: Scarlett
 
+      - name: List workspace files
+        run: ls -al
+
       - name: Code Coverage Summary Report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
