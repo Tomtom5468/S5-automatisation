@@ -19,7 +19,7 @@ jobs:
         uses: php-actions/phpunit@v3
         with:
           version: 9.5.26
-          php_extensions: xdebug
+          php_extensions: gd sqlite3 dom json libxml mbstring tokenizer xml xmlwriter zip
           configuration: phpunit.xml
         env:
           XDEBUG_MODE: coverage
