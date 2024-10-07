@@ -18,6 +18,12 @@ jobs:
 
       - uses: php-actions/composer@v6
 
+      - name: Setup PHP environment
+        uses: shivammathur/setup-php@v2
+        with:
+          coverage: none
+          tools: phpmd
+
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v3
         with:
@@ -47,14 +53,8 @@ jobs:
           phpcs_path: php phpcs.phar
           standard: phpcs.xml
 
-      - name: Install PHPMD
-        run: |
-          curl -L https://phpmd.org/static/latest/phpmd.phar -o phpmd.phar
-          php phpmd.phar --version
-
       - name: Run PHPMD
-        run: |
-          php phpmd.phar src text phpmd.xml
+        run: phpmd . github phpmd.ruleset.xml --exclude 'tests/*,vendor/*'
 
       - name: Install PHPStan
         run: composer require --dev phpstan/phpstan
