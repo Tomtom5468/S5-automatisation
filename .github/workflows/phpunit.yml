@@ -54,7 +54,7 @@ jobs:
           standard: phpcs.xml
 
       - name: Run PHPMD
-        run: phpmd . github cleancode,codesize,controversial,design,naming,unusedcode --exclude 'tests/*,vendor/*'
+        run: phpmd bin,cfg,lib,tpl,tst github cleancode,codesize,controversial,design,naming,unusedcode --exclude 'tests/*,vendor/*'
 
       - name: Install PHPStan
         run: composer require --dev phpstan/phpstan
