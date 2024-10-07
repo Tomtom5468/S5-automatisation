@@ -46,3 +46,18 @@ jobs:
           files: "**.php"
           phpcs_path: php phpcs.phar
           standard: phpcs.xml
+
+      - name: Install PHPMD
+        run: |
+          curl -L https://phpmd.org/static/latest/phpmd.phar -o phpmd.phar
+          php phpmd.phar --version
+
+      - name: Run PHPMD
+        run: |
+          php phpmd.phar src text phpmd.xml
+
+      - name: Install PHPStan
+        run: composer require --dev phpstan/phpstan
+
+      - name: Run PHPStan
+        run: vendor/bin/phpstan analyse src --level max
