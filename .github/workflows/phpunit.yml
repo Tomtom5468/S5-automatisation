@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  XDEBUG_MODE: coverage
+
 jobs:
   build-test:
     runs-on: ubuntu-latest
@@ -31,7 +34,7 @@ jobs:
       - name: Code Coverage Summary Report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          filename: log/cobertura.xml
+          filename: log/coverage-cobertura.xml
           format: markdown
           badge: true
           output: both
