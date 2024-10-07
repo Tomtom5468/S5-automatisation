@@ -18,12 +18,9 @@ jobs:
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v3
         with:
-          version: 9.5.26
+          version: 9.6.11
           php_extensions: gd sqlite3 dom json libxml mbstring tokenizer xdebug xml xmlwriter zip
           configuration: phpunit.xml
-        env:
-          XDEBUG_MODE: coverage
-          TEST_NAME: Scarlett
 
       - name: List workspace files
         run: ls -al
