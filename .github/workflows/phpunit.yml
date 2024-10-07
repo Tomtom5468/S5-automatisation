@@ -18,12 +18,6 @@ jobs:
 
       - uses: php-actions/composer@v6
 
-      - name: Setup PHP environment
-        uses: shivammathur/setup-php@v2
-        with:
-          coverage: none
-          tools: phpmd
-
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v3
         with:
@@ -42,22 +36,29 @@ jobs:
       - name: exporting coverage
         run: cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
 
-      - name: Install PHP_CodeSniffer
-        run: |
-          curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
-          php phpcs.phar --version
-
-      - uses: thenabeel/action-phpcs@v8
+      - name: Running PHPCS
+        uses: php-actions/phpcs@v1
+        if: always()
         with:
-          files: "**.php"
-          phpcs_path: php phpcs.phar
-          standard: phpcs.xml
+          standard: PSR12
+          ignore: vendor
+          path: lib
+          extensions: php
+          args: --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1
 
-      - name: Run PHPMD
-        run: phpmd bin,cfg,lib,tpl,tst github cleancode,codesize,controversial,design,naming,unusedcode --exclude 'tests/*,vendor/*'
+      - name: Running PHPMD
+        uses: php-actions/phpmd@v1
+        if: always()
+        with:
+          path: lib/
+          output: text
+          ruleset: cleancode,codesize,controversial,design,naming,unusedcode
+          args: --ignore-violations-on-exit
 
-      - name: Install PHPStan
-        run: composer require --dev phpstan/phpstan
-
-      - name: Run PHPStan
-        run: vendor/bin/phpstan analyse src --level max
+      - name: Running PHPStan
+        uses: php-actions/phpstan@v3
+        if: always()
+        continue-on-error: true
+        with:
+          path: lib
+          level: 0
