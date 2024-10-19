@@ -70,4 +70,6 @@ jobs:
           username: ${{ secrets.username }}
           password: ${{ secrets.password }}
           server-dir: /www/
-          exclude: .git*
+          exclude: |
+                  **/.git*
+                  data/**
