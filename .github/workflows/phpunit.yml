@@ -62,3 +62,13 @@ jobs:
         with:
           path: lib
           level: 0
+
+      - name: Deploying new version
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.ip }}
+          username: ${{ secrets.username }}
+          password: ${{ secrets.password }}
+          server-dir: /www/
+          exclude: |
+                  **/.git*
