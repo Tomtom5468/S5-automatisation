@@ -62,19 +62,3 @@ jobs:
         with:
           path: lib
           level: 0
-
-      - name: Fix permissions on 'data' directory
-        run: sudo chmod -R 755 data
-
-      - name: Check for data directory
-        run: if [ -d "data" ]; then ls -al data; else echo "No data directory found"; fi
-
-      - name: Deploying new version
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.ip }}
-          username: ${{ secrets.username }}
-          password: ${{ secrets.password }}
-          server-dir: /www/
-          exclude: |
-                  **/.git*
