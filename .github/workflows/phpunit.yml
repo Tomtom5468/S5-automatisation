@@ -63,6 +63,9 @@ jobs:
           path: lib
           level: 0
 
+      - name: Check for data directory
+        run: if [ -d "data" ]; then ls -al data; else echo "No data directory found"; fi
+
       - name: Deploying new version
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -72,4 +75,3 @@ jobs:
           server-dir: /www/
           exclude: |
                   **/.git*
-                  data/**
