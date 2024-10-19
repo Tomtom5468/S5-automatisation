@@ -1,0 +1,22 @@
+name: Deploy
+on:
+  workflow_run:
+    workflows: [phpunit]
+    types: [completed]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout ${{ github.ref }} on ${{ runner.os }} machine
+        uses: actions/checkout@v4
+      - name: Deploying new version
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.ip }}
+          username: ${{ secrets.username }}
+          password: ${{ secrets.password }}
+          server-dir: /www/
+          exclude: |
+                  **/.git*
